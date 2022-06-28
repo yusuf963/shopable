@@ -15,7 +15,7 @@ const SignIn = () =>{
     return(
         <div>
             <p>Sign in page</p>
-            <img src={userImage}/>
+            <img src={userImage} alt='user image'/>
             {userName && <p>Welcome back {userName}</p>}
             <button onClick={handleGoogleAuth}>Sign in With Google</button>
         </div>
