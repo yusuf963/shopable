@@ -1,20 +1,25 @@
 import { initializeApp } from "firebase/app";
+import {config} from '../../secret.js' 
+
 import { 
     getAuth,
      signInWithPopup,
      signInWithRedirect,
      GoogleAuthProvider
      } from "firebase/auth";
+// Interact with firestore/databas
+import {getFirestore, doc, setDoc, getDoc} from 'firebase/firestore'
 
 const firebaseConfig = {
-    apiKey: "AIzaSyDAhV54rR97_4pSLLM2CZJ_fW6Pbwd0QE8",
-    authDomain: "crown-db-2350a.firebaseapp.com",
-    databaseURL: "https://crown-db-2350a.firebaseio.com",
-    projectId: "crown-db-2350a",
-    storageBucket: "crown-db-2350a.appspot.com",
-    messagingSenderId: "590834834404",
-    appId: "1:590834834404:web:934ac2b3c1c47448c805f1",
-    measurementId: "G-3D52BRPF1X"
+    // apiKey: "AIzaSyDAhV54rR97_4pSLLM2CZJ_fW6Pbwd0QE8",
+    apiKey: config.REACT_APP_FIREBASE_API_KEY,
+    authDomain: config.REACT_APP_FIREBASE_AUTH_DOMAIN,
+    databaseURL: config.REACT_APP_FIREBASE_DATA_BASE_URL,
+    projectId: config.REACT_APP_FIREBASE_PROJECT_ID,
+    storageBucket: config.REACT_APP_FIREBASE_STORAGE_BUCKET,
+    messagingSenderId: config.REACT_APP_FIREBASE_MESSAGING_SEDER_ID,
+    appId: config.REACT_APP_FIREBASE_APP_ID,
+    measurementId: config.REACT_APP_FIREBASE_MEASUREMENT_ID
   };
   
   // Initialize Firebase
@@ -23,9 +28,13 @@ const firebaseConfig = {
   provider.setCustomParameters({
     prompt: 'select_account'
   })
-
  const auth = getAuth();
  const  signInWithGooglePopup = () => signInWithPopup(auth,provider)
+
+ // interact with firestore
+
+
+
  export{
     auth,
     signInWithGooglePopup

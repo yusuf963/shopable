@@ -8,9 +8,6 @@ const SignIn = () =>{
         const requestGooglePopupModel = await signInWithGooglePopup()
         setUserImage(requestGooglePopupModel.user?.photoURL)
         setUserName(requestGooglePopupModel.user?.displayName)
-        console.log(requestGooglePopupModel.user?.displayName)
-        console.log(requestGooglePopupModel.user?.phoneNumber)
-        console.log(requestGooglePopupModel.user?.photoURL)
         return requestGooglePopupModel
     }
 
