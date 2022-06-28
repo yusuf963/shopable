@@ -1,6 +1,4 @@
 import { initializeApp } from "firebase/app";
-// import {config} from '../../secret.js' 
-
 import { 
     getAuth,
      signInWithPopup,
@@ -29,10 +27,6 @@ const firebaseConfig = {
   })
  const auth = getAuth();
  const  signInWithGooglePopup = () => signInWithPopup(auth,provider)
-
- // interact with firestore
-
-
 
  export{
     auth,
