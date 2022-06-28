@@ -1,5 +1,5 @@
 import { initializeApp } from "firebase/app";
-import {config} from '../../secret.js' 
+// import {config} from '../../secret.js' 
 
 import { 
     getAuth,
@@ -11,16 +11,18 @@ import {
 import {getFirestore, doc, setDoc, getDoc} from 'firebase/firestore'
 
 const firebaseConfig = {
-    // apiKey: "AIzaSyDAhV54rR97_4pSLLM2CZJ_fW6Pbwd0QE8",
-    apiKey: config.REACT_APP_FIREBASE_API_KEY,
-    authDomain: config.REACT_APP_FIREBASE_AUTH_DOMAIN,
-    databaseURL: config.REACT_APP_FIREBASE_DATA_BASE_URL,
-    projectId: config.REACT_APP_FIREBASE_PROJECT_ID,
-    storageBucket: config.REACT_APP_FIREBASE_STORAGE_BUCKET,
-    messagingSenderId: config.REACT_APP_FIREBASE_MESSAGING_SEDER_ID,
-    appId: config.REACT_APP_FIREBASE_APP_ID,
-    measurementId: config.REACT_APP_FIREBASE_MEASUREMENT_ID
+    apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
+    authDomain: process.env.REACT_APP_FIREBASE_AUTH_DOMAIN,
+    databaseURL: process.env.REACT_APP_FIREBASE_DATA_BASE_URL,
+    projectId: process.env.REACT_APP_FIREBASE_PROJECT_ID,
+    storageBucket: process.env.REACT_APP_FIREBASE_STORAGE_BUCKET,
+    messagingSenderId: process.env.REACT_APP_FIREBASE_MESSAGING_SEDER_ID,
+    appId: process.env.REACT_APP_FIREBASE_APP_ID,
+    measurementId: process.env.REACT_APP_FIREBASE_MEASUREMENT_ID
   };
+  console.log(firebaseConfig.apiKey,firebaseConfig.authDomain, firebaseConfig.databaseURL,firebaseConfig.projectId,
+    firebaseConfig.storageBucket,firebaseConfig.messagingSenderId, firebaseConfig.appId,firebaseConfig.measurementId
+    )
   
   // Initialize Firebase
   const firebaseApp = initializeApp(firebaseConfig);
