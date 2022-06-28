@@ -4,11 +4,8 @@ import { initializeApp } from "firebase/app";
 import { 
     getAuth,
      signInWithPopup,
-     signInWithRedirect,
      GoogleAuthProvider
      } from "firebase/auth";
-// Interact with firestore/databas
-import {getFirestore, doc, setDoc, getDoc} from 'firebase/firestore'
 
 const firebaseConfig = {
     apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
