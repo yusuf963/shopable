@@ -1,25 +1,25 @@
-import {Routes, Route} from 'react-router-dom'
+import { Routes, Route } from 'react-router-dom'
 import { Navigation } from './components/navigation/Navigation'
-import {Home} from './pages/Home'
-import {SignIn} from './pages/SignIn'
+import { Home } from './pages/Home'
+import { SignIn } from './pages/SignIn'
 
-const Shop =()=>{
-  return(
+const Shop = () => {
+  return (
     <div>
-      <p>shop</p>
+      <p>for the text shop</p>
     </div>
   )
 }
-const App =()=> {
+const App = () => {
   return (
     <Routes>
-      <Route path='/' element={<Navigation/>}>
-      <Route index element={<Home/>}/>
-      <Route path='/shop' element={<Shop/>}/>
-      <Route path='/sign-in' element={<SignIn/>}/>
+      <Route path='/' element={<Navigation />}>
+        <Route index element={<Home />} />
+        <Route path='/shop' element={<Shop />} />
+        <Route path='/sign-in' element={<SignIn />} />
       </Route>
     </Routes>
   );
 }
 
-export {App};
+export { App, Shop };
