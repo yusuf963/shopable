@@ -6,3 +6,14 @@ before_install:
   - docker build -t yusuf/client:v0 .
 script:
   - docker run -e CI=true -it yusuf/client:v0 npm run test -- --coverage
+deploy:
+  provider: elasticbeanstalk
+  region: 'us-east'
+  app: 'Containerization'
+  env: 'Containerization-env'
+  bucket_name: 'elasticbeanstalk-us-east-1-971902593315'
+  bucket_path: 'Containerization'
+  on:
+    branch: main
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_key: "$AWS_ACESS_SECRET_KEY"
