@@ -13,10 +13,10 @@ script:
 deploy:
   provider: elasticbeanstalk
   region: "us-east-1"
-  app: "docker-react"
-  env: "dockerreact-env"
+  app: "shopable"
+  env: "Shopable-env"
   bucket_name: "elasticbeanstalk-us-east-1-971902593315"
-  bucket_path: "docker-react"
+  bucket_path: "shopable"
   on:
     branch: main
   access_key_id: $AWS_ACCESS_KEY
