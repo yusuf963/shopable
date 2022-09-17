@@ -1,7 +1,7 @@
 import './Category-item.scss'
 
-const CategoryItem =({category})=>{
-    const {title, imageUrl} = category
+const CategoryItem =({imageUrl, title})=>{
+    // const {title, imageUrl} = category
     return(
         <div className='category-container'>
             <div

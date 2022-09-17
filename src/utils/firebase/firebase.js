@@ -1,10 +1,25 @@
-import { initializeApp } from "firebase/app";
-import { 
-    getAuth,
-     signInWithPopup,
-     GoogleAuthProvider
-     } from "firebase/auth";
+import { initializeApp } from 'firebase/app';
+import {
+  getAuth,
+  signInWithRedirect,
+  signInWithPopup,
+  GoogleAuthProvider,
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
 
+} from 'firebase/auth';
+import { getFirestore, doc, getDoc, setDoc } from 'firebase/firestore';
+
+// console.log(process.env.REACT_APP_FIREBASE_API_KEY,
+//   process.env.REACT_APP_FIREBASE_AUTH_DOMAIN,
+//   process.env.REACT_APP_FIREBASE_DATA_BASE_URL,
+//   process.env.REACT_APP_FIREBASE_PROJECT_ID,
+//   process.env.REACT_APP_FIREBASE_STORAGE_BUCKET,
+//   process.env.REACT_APP_FIREBASE_STORAGE_BUCKET,
+//   process.env.REACT_APP_FIREBASE_MESSAGING_SEDER_ID,
+//   process.env.REACT_APP_FIREBASE_APP_ID,
+//   process.env.REACT_APP_FIREBASE_MEASUREMENT_ID
+// )
 const firebaseConfig = {
   // apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
   // authDomain: process.env.REACT_APP_FIREBASE_AUTH_DOMAIN,
@@ -23,23 +38,63 @@ const firebaseConfig = {
   appId: "1:590834834404:web:934ac2b3c1c47448c805f1",
   measurementId: "G-3D52BRPF1X",
 };
-  // console.log(firebaseConfig.apiKey,firebaseConfig.authDomain, firebaseConfig.databaseURL,firebaseConfig.projectId,
-  //   firebaseConfig.storageBucket,firebaseConfig.messagingSenderId, firebaseConfig.appId,firebaseConfig.measurementId
-  //   )
-  
-  // Initialize Firebase
-  initializeApp(firebaseConfig);
-  const provider = new GoogleAuthProvider()
-  provider.setCustomParameters({
-    prompt: 'select_account'
-  })
- const auth = getAuth();
- const  signInWithGooglePopup = () => signInWithPopup(auth,provider)
 
- export{
-    auth,
-    signInWithGooglePopup
- }
+const firebaseApp = initializeApp(firebaseConfig);
+
+const googleProvider = new GoogleAuthProvider();
+
+googleProvider.setCustomParameters({
+  prompt: 'select_account',
+});
+
+export const auth = getAuth();
+
+export const signInWithGooglePopup = () =>
+  signInWithPopup(auth, googleProvider);
+  
+export const signInWithGoogleRedirect = () =>
+  signInWithRedirect(auth, googleProvider);
+
+export const db = getFirestore();
+
+export const createUserDocumentFromAuth = async (
+  userAuth,
+  additionalInformation = {}
+) => {
+  if (!userAuth) return;
+
+  const userDocRef = doc(db, 'users', userAuth.uid);
+  const userSnapshot = await getDoc(userDocRef);
+  // creating user and adding user to DB 
+  if (!userSnapshot.exists()) {
+    const { displayName, email } = userAuth;
+    const createdAt = new Date();
+
+    try {
+      await setDoc(userDocRef, {
+        displayName,
+        email,
+        createdAt,
+        ...additionalInformation,
+      });
+    } catch (error) {
+      console.log('error creating the user', error.message);
+    }
+  }
+
+  return userDocRef;
+};
+
+export const createAuthUserWithEmailAndPassword = async (email, password) => {
+  if (!email || !password) return;
+
+  return await createUserWithEmailAndPassword(auth, email, password);
+};
+export const signInAuthUserWithEmailAndPassword =async(email, password)=> {
+  if (!email || !password) return;
+  return await signInWithEmailAndPassword(auth, email, password); 
+}
+
 //   const analytics = getAnalytics(app);
 
 // const auth = getAuth();
