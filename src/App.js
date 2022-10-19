@@ -2,14 +2,8 @@ import { Routes, Route } from 'react-router-dom'
 import { Navigation } from './components/navigation/Navigation'
 import { Home } from './pages/home/Home'
 import { Auth } from './pages/auth/Auth'
+import { Shop } from './pages/shop/Shop'
 
-const Shop = () => {
-  return (
-    <div>
-      <p>for the text shop</p>
-    </div>
-  )
-}
 const App = () => {
   return (
     <Routes>

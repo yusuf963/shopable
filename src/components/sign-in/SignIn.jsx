@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useContext } from 'react'
 import {
   signInWithGooglePopup,
   createUserDocumentFromAuth,
@@ -10,6 +10,8 @@ import {SignInWithGoogleBtn} from '../sign-in-with-google/SignInWithGoogle'
 import {Button} from '../button/Button'
 import './SignIn.scss'
 
+import {UserContext, CartContext} from '../../context/user.context'
+
 const defaultFormFields = {
   email: '',
   password: '',
@@ -17,6 +19,8 @@ const defaultFormFields = {
 export const SignIn = () => {
   const [signInForm, setSignInForm] = useState(defaultFormFields)
   const { email, password } = signInForm
+  const { setCurrentUser } = useContext(UserContext)
+  const {setCurrentCart} = useContext(CartContext)
   
   const resetFormFields = () => {
     setSignInForm(defaultFormFields);
@@ -34,6 +38,9 @@ export const SignIn = () => {
     event.preventDefault()
     try {
       const { user } = await signInAuthUserWithEmailAndPassword(email, password)
+      setCurrentUser(user)
+      setCurrentCart(1)
+      console.log('setCurrentUser(user)',setCurrentUser(user))
       resetFormFields()
     } catch (error) {
       switch (error.code) {
